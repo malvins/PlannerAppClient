@@ -1,22 +1,29 @@
 ﻿@namespace PlannerAppClient.Components
 
 <EditForm Model="_model" OnValidSubmit="LoginUserAsync">
+    @*data annotation validator buat cek validasi*@
     <DataAnnotationsValidator/>
     <MudCard>
         <MudCardHeader>
             <CardHeaderContent>
-
-                <MudText Typo="Typo.h2">Welcome to Planner APP</MudText>
+                <MudText Typo="Typo.h6">Welcome to Planner APP</MudText>
             </CardHeaderContent>
         </MudCardHeader>
         <MudCardContent>
             <MudTextField InputType="InputType.Email" Label="Email" HelperText="Required" Placeholder="test@test.com" @bind-Value="_model.Email"></MudTextField>
             <MudTextField InputType="InputType.Password" Label="Password" HelperText="Required" @bind-Value="_model.Password"></MudTextField>
+            
+            @*validation summary wajib dipake*@
+            <ValidationSummary/>
+            @if (!string.IsNullOrWhiteSpace(_errorMessage)) { 
+                <MudAlert Severity="Severity.Error" Class="m-2" Variant="Variant.Filled">@_errorMessage</MudAlert>
+            }
+
 
         </MudCardContent>
         <MudCardActions>
-            <MudButton ButtonType="ButtonType.Submit" Variant="Variant.Filled" Class="mr-3" Color="Color.Primary">Login</MudButton>
-            <MudButton  Variant="Variant.Outlined" Color="Color.Secondary" Class="ml-1">Create Account</MudButton>
+            <MudButton ButtonType="ButtonType.Submit" Variant="Variant.Filled" Class="mr-3" Color="Color.Primary" Disabled="_isBusy">Login</MudButton>
+            <MudButton  Variant="Variant.Outlined" Color="Color.Secondary" Class="ml-1" Disabled="_isBusy">Create Account</MudButton>
         </MudCardActions>
     </MudCard>
 </EditForm>
