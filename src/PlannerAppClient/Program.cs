@@ -27,9 +27,16 @@ namespace PlannerAppClient
             builder.Services.AddScoped(sp => sp.GetService<IHttpClientFactory>().CreateClient("PlannerApp.Api"));
             //builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri(builder.HostEnvironment.BaseAddress) });
 
+            /*untuk nambahin mudblazor */
             builder.Services.AddMudServices();
+
+            /*untuk nambahin fungsi penyimpanan localstorage di browser*/
             builder.Services.AddBlazoredLocalStorage();
+
+            /*untuk otorisasi di .netcore*/
             builder.Services.AddAuthorizationCore();
+
+            /*pengecekan state autentikasinya pake provider custom yaitu JwtAuthenticationStateProvider*/
             builder.Services.AddScoped<AuthenticationStateProvider, JwtAuthenticationStateProvider>();
 
             await builder.Build().RunAsync();
