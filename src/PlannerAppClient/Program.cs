@@ -10,6 +10,7 @@ using MudBlazor.Services;
 using Blazored.LocalStorage;
 using System.Net.Http;
 using Microsoft.AspNetCore.Components.Authorization;
+using PlannerApp.Client.Services;
 
 namespace PlannerAppClient
 {
@@ -39,6 +40,7 @@ namespace PlannerAppClient
             /*pengecekan state autentikasinya pake provider custom yaitu JwtAuthenticationStateProvider*/
             builder.Services.AddScoped<AuthenticationStateProvider, JwtAuthenticationStateProvider>();
 
+            builder.Services.AddHttpClientServices();
             await builder.Build().RunAsync();
         }
 
